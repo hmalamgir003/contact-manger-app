@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Provider } from "./context";
 
-function App() {
+import "./App.css";
+
+import Header from "./conponents/layout/Header";
+import Contacts from "./conponents/contacts/Contacts";
+import AddContact from "./conponents/contacts/AddContact";
+import EditContact from "./conponents/contacts/EditContact";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider>
+      <Router>
+        <Header branding="Contact Manager" />
+        <div className="container">
+          <div className="App">
+            <h1 className="mb-5">Contact List</h1>
+            <Route exact path="/" component={Contacts} />
+            <Route exact path="/add" component={AddContact} />
+            <Route exact path="/edit/:id" component={EditContact} />
+          </div>
+        </div>
+      </Router>
+    </Provider>
   );
-}
+};
 
 export default App;
